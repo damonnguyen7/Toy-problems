@@ -24,3 +24,6 @@ var bubbleSort = function(array) {
   }
   return isSorted ? array : bubbleSort(array);
 }
+
+//Time complexity: Quadratic O(n^2): bubbleSort is quadratic because of the mechanism of having a for loop 
+//within a for loop.
