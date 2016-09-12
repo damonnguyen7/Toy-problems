@@ -14,3 +14,6 @@ var commonCharacters = (string1, string2) => {
   });
   return Array.from(new Set(output)).join("");
 };
+
+//Array.from() method will create an array instance of the iterable object.
+//new Set() instantiates a new object with non duplicates.
