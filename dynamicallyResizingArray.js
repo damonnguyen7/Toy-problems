@@ -6,8 +6,14 @@ rarely that its amortized time is still O(1)
 */
 
 function dynamicArray(arr, input) {
-  var double = arr.length * 2;
+  if (!Array.isArray(arr) || input === null) {
+    return null;
+  }
   if (arr[arr.length - 1] !== null) {
+    if (input) {
+      arr.push(input);
+    }
+    var double = arr.length * 2;
     for (var i = arr.length; i < double; i++) {
       arr.push(null);
     }
@@ -21,3 +27,5 @@ function dynamicArray(arr, input) {
   }
   return arr
 }
+
+module.exports = dynamicArray;
