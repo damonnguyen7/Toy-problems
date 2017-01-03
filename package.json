@@ -1,0 +1,22 @@
+{
+  "name": "coding_challenges",
+  "version": "1.0.0",
+  "description": "These are all the coding challenges that I have worked on",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damonnguyen92/Toy-problems.git"
+  },
+  "author": "Damon Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damonnguyen92/Toy-problems/issues"
+  },
+  "homepage": "https://github.com/damonnguyen92/Toy-problems#readme",
+  "dependencies": {
+    "chai": "^3.5.0"
+  }
+}
