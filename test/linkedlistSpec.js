@@ -95,6 +95,33 @@ describe('contains', function() {
     expect(LinkedList.contains(7)).to.equal(true);    
     expect(LinkedList.contains(8)).to.equal(true);    
     expect(LinkedList.contains(9)).to.equal(true);    
- 
   });
+});
+
+describe('removeDuplicateNode', function() {
+  it('should be a function', function() {
+    expect(typeof LinkedList.removeDuplicateNode).to.equal('function');
+  });
+
+  var LinkedList = new linkedList.LinkedList();
+  LinkedList.addToTail(1);
+  LinkedList.addToTail(2);
+  LinkedList.addToTail(3);
+  LinkedList.addToTail(1);
+  LinkedList.addToTail(7);
+  LinkedList.addToTail(3);
+  LinkedList.removeDuplicateNode();
+
+  expect(LinkedList.head).to.deep.equal({value: 1, next: {value: 2, next: {value: 3, next: {value: 7, next: null}}}});
+
+  var LinkedList2 = new linkedList.LinkedList();
+  LinkedList2.addToTail(1);
+  LinkedList2.addToTail(1);
+  LinkedList2.addToTail(2);
+  LinkedList2.addToTail(2);
+  LinkedList2.addToTail(3);
+  LinkedList2.addToTail(3);
+  LinkedList2.removeDuplicateNode();
+  
+  expect(LinkedList2.head).to.deep.equal({value: 1, next: {value: 2, next: {value: 3, next: null}}});
 });
