@@ -57,6 +57,30 @@ function LinkedList() {
     nodeRemover(list.head);
   }
 
+  //find nth node to last node
+  list.nthToLast = function(nth, linkedList) {
+    var result;
+    var counter = 0;
+    if (typeof nth !== 'number') {
+      return 'nth must be a number type';
+    }
+    function sliceLink(node) {
+      if (node.next === null) {
+        result = node;
+      }
+      if (counter === nth) {
+        list.head = node;
+        return result = list.head;
+      } else {
+        counter++;
+        sliceLink(node.next);
+      }
+
+    }
+    sliceLink(linkedList);
+    return result;
+  }
+
   list.contains = function(target){
     var doesContain = false;
     function searchLinkedList(node){
@@ -71,7 +95,6 @@ function LinkedList() {
     searchLinkedList(list.head);
     return doesContain;
   };
-
   return list;
 }
 
