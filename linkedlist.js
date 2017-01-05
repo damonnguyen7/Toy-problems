@@ -33,6 +33,30 @@ function LinkedList() {
     return removed;
   }
 
+  //remove duplicate  node
+  list.removeDuplicateNode = function() {
+    var current;
+    var previous;
+    var nodeTracker = [];
+
+    function nodeRemover(node) {
+      if (nodeTracker.indexOf(node.value) > - 1 && node.next === null) {
+        list.tail = previous;
+      }
+      if (nodeTracker.indexOf(node.value) === -1) {
+        nodeTracker.push(node.value);
+        previous = node;
+        nodeRemover(previous.next);
+      } else {
+        previous.next = node.next;
+        if (node.next !== null) {
+          nodeRemover(node.next);
+        }
+      }
+    }
+    nodeRemover(list.head);
+  }
+
   list.contains = function(target){
     var doesContain = false;
     function searchLinkedList(node){
