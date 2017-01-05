@@ -122,6 +122,45 @@ describe('removeDuplicateNode', function() {
   LinkedList2.addToTail(3);
   LinkedList2.addToTail(3);
   LinkedList2.removeDuplicateNode();
-  
+
   expect(LinkedList2.head).to.deep.equal({value: 1, next: {value: 2, next: {value: 3, next: null}}});
+});
+
+describe('nthToLast', function() {
+  var LinkedList = new linkedList.LinkedList();
+
+  it('should be a function', function() {
+    expect(typeof LinkedList.nthToLast).to.equal('function');
+  });
+
+  it('target parameter should be a number or throw error', function() {
+    var error = 'nth must be a number type';
+    expect(LinkedList.nthToLast('string')).to.equal(error);
+    expect(LinkedList.nthToLast({})).to.equal(error);
+    expect(LinkedList.nthToLast([])).to.equal(error);
+    expect(LinkedList.nthToLast(function(){})).to.equal(error);
+  });
+
+  it('should return a linked list: object', function() {
+    LinkedList.addToTail(1);
+    LinkedList.addToTail(2);
+    LinkedList.addToTail(3);
+    LinkedList.addToTail(4);
+    expect(LinkedList.nthToLast(1, LinkedList.head)).to.be.a('object');
+  });
+
+  it('should slice the linked list from nth to last', function() {
+    var LinkedList = new linkedList.LinkedList();
+    LinkedList.addToTail(1);
+    LinkedList.addToTail(2);
+    LinkedList.addToTail(3);
+    LinkedList.addToTail(4);
+    expect(LinkedList.nthToLast(1, LinkedList.head)).to.deep.equal({value: 2, next: {value: 3, next: {value: 4, next: null}}});
+
+    LinkedList.addToTail(5); 
+    LinkedList.addToTail(6); 
+    LinkedList.addToTail(7); 
+    LinkedList.addToTail(8); 
+    expect(LinkedList.nthToLast(3, LinkedList.head)).to.deep.equal({value: 5, next: {value: 6, next: {value: 7, next: {value: 8, next: null}}}});
+  });
 });
