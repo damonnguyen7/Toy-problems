@@ -44,9 +44,11 @@ describe('addToTail', function() {
 
   it('head should point to the first node, middle node must point to the newest node, newest node must point to null', function() {
     var LinkedList = new linkedList.LinkedList();
-    LinkedList.addToTail(7);
-    LinkedList.addToTail(8);
-    LinkedList.addToTail(9);
+
+    for (var i = 7; i <= 9; i++) {
+      LinkedList.addToTail(i);
+    }
+
     expect(LinkedList.head).to.deep.equal({value: 7, next: {value:8, next: {value:9, next: null}}});
     expect(LinkedList.tail).to.deep.equal({value: 9, next: null});
   });
@@ -60,12 +62,43 @@ describe('removeHead', function() {
 
   it('should return the node that it removed', function() {
     var LinkedList = new linkedList.LinkedList();
-    LinkedList.addToTail(7);
-    LinkedList.addToTail(8);
-    LinkedList.addToTail(9); 
+
+    for (var i = 7; i <= 9; i++) {
+      LinkedList.addToTail(i);
+    }
+
     expect(LinkedList.removeHead()).to.deep.equal(7);
     expect(LinkedList.head).to.deep.equal({value: 8, next: {value: 9, next: null}});
   });
+});
+
+describe('removeNode', function() {
+  var LinkedList = new linkedList.LinkedList();
+
+  it('should be a function', function() {
+    expect(typeof LinkedList.removeNode).to.equal('function');
+  });
+
+  it('should take a number as a input and throw: argument value should be a integer', function() {
+    var error = 'argument value should be a integer';
+    expect(LinkedList.removeNode('string')).to.equal(error);
+    expect(LinkedList.removeNode({})).to.equal(error);
+    expect(LinkedList.removeNode([])).to.equal(error);
+    expect(LinkedList.removeNode(function(){})).to.equal(error);
+    expect(LinkedList.removeNode(undefined)).to.equal(error);
+  });
+
+  it('should remove node from the middle of a single linked list', function() {
+    var LinkedList = new linkedList.LinkedList();
+
+    for (var i = 1; i <= 5; i++) {
+      LinkedList.addToTail(i);
+    }
+
+    expect(LinkedList.removeNode(3, LinkedList.head)).to.deep.equal({value: 1, next: {value: 2, next: {value: 4, next: {value: 5, next: null}}}});
+  });
+
+
 });
 
 describe('contains', function() {
@@ -76,26 +109,29 @@ describe('contains', function() {
 
   it('should return false if target is not in the linked list', function() {
     var LinkedList = new linkedList.LinkedList();
-    LinkedList.addToTail(7);
-    LinkedList.addToTail(8);
-    LinkedList.addToTail(9); 
-    expect(LinkedList.contains(1)).to.equal(false);    
-    expect(LinkedList.contains(2)).to.equal(false);    
-    expect(LinkedList.contains(3)).to.equal(false);    
-    expect(LinkedList.contains(4)).to.equal(false);    
-    expect(LinkedList.contains(5)).to.equal(false);    
-    expect(LinkedList.contains(6)).to.equal(false);    
+
+    for (var i = 7; i <= 9; i++) {
+      LinkedList.addToTail(i);
+    }
+
+    for (var i = 1; i <= 6; i++) {
+      expect(LinkedList.contains(i)).to.equal(false);    
+    }
+
   });
 
   it('should return true if target is in the linked list', function() {
     var LinkedList = new linkedList.LinkedList();
-    LinkedList.addToTail(7);
-    LinkedList.addToTail(8);
-    LinkedList.addToTail(9); 
-    expect(LinkedList.contains(7)).to.equal(true);    
-    expect(LinkedList.contains(8)).to.equal(true);    
-    expect(LinkedList.contains(9)).to.equal(true);    
+
+    for (var i = 7; i <= 9; i++) {
+      LinkedList.addToTail(i);
+    }
+
+    for (var i = 7; i <= 9; i++) {
+      expect(LinkedList.contains(i)).to.equal(true); 
+    }   
   });
+
 });
 
 describe('removeDuplicateNode', function() {
@@ -142,25 +178,22 @@ describe('nthToLast', function() {
   });
 
   it('should return a linked list: object', function() {
-    LinkedList.addToTail(1);
-    LinkedList.addToTail(2);
-    LinkedList.addToTail(3);
-    LinkedList.addToTail(4);
+    for (var i = 1; i <= 4; i++) {
+      LinkedList.addToTail(i);
+    }
     expect(LinkedList.nthToLast(1, LinkedList.head)).to.be.a('object');
   });
 
   it('should slice the linked list from nth to last', function() {
     var LinkedList = new linkedList.LinkedList();
-    LinkedList.addToTail(1);
-    LinkedList.addToTail(2);
-    LinkedList.addToTail(3);
-    LinkedList.addToTail(4);
+    for (var i = 1; i <= 4; i++) {
+      LinkedList.addToTail(i);
+    }
     expect(LinkedList.nthToLast(1, LinkedList.head)).to.deep.equal({value: 2, next: {value: 3, next: {value: 4, next: null}}});
 
-    LinkedList.addToTail(5); 
-    LinkedList.addToTail(6); 
-    LinkedList.addToTail(7); 
-    LinkedList.addToTail(8); 
+    for (var i = 5; i <= 8; i++) {
+      LinkedList.addToTail(i);
+    }
     expect(LinkedList.nthToLast(3, LinkedList.head)).to.deep.equal({value: 5, next: {value: 6, next: {value: 7, next: {value: 8, next: null}}}});
   });
 });

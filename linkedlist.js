@@ -33,6 +33,22 @@ function LinkedList() {
     return removed;
   }
 
+  //remove node
+  list.removeNode = function(value, linkedList) {
+    var result;
+    var previous;
+    var error = 'argument value should be a integer';
+
+    if (typeof value !== 'number') {
+      return error;
+    }
+
+    function nodeRemover(node) {
+    }
+    nodeRemover(linkedList);
+    return result;
+  }
+
   //remove duplicate  node
   list.removeDuplicateNode = function() {
     var current;
@@ -75,7 +91,6 @@ function LinkedList() {
         counter++;
         sliceLink(node.next);
       }
-
     }
     sliceLink(linkedList);
     return result;
