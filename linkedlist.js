@@ -20,9 +20,11 @@ function LinkedList() {
     if (list.tail === null) {
       list.tail = new Node(value);
       list.head = list.tail;
+      return list.tail;
     } else {
       list.tail.next = new Node(value);
       list.tail = list.tail.next;
+      return list.tail;
     }
   }
 
@@ -51,7 +53,7 @@ function LinkedList() {
     function targetFinder(node) {
       current = node;
       next = node.next;
-      
+
       if (current && current.next === null) {
         if (current.value === target) {
           list.head = null;
@@ -137,6 +139,46 @@ function LinkedList() {
     searchLinkedList(list.head);
     return doesContain;
   };
+
+  list.hasCycle = function(linkedList) {
+    var rabbit = linkedList,
+        turtle = linkedList,
+        turtleLag = true; 
+    while (rabbit = rabbit.next) { 
+      if (rabbit === turtle) { 
+        return true;
+      }
+      if (!turtleLag) { 
+        turtle = turtle.next; 
+      }
+      turtleLag = !turtleLag; 
+    }
+    return false; 
+  }
+
+  list.findBeginningLoop = function(linkedList) {
+    var notCircular = "not a circular linkeded list";
+    var beginningOfLoop;
+
+    while (beginningOfLoop === undefined) {
+      if (linkedList.next === null) {
+        return false;
+      }
+      if (linkedList.count === undefined) {
+        linkedList.count = 1
+        linkedList = linkedList.next;
+      } else {
+        linkedList.count++;
+        linkedList = linkedList.next;
+      }
+      if (linkedList.count === 2) {
+        delete linkedList.count;
+        beginningOfLoop = linkedList
+      }
+    }
+    return beginningOfLoop.value;
+  }
+
   return list;
 }
 

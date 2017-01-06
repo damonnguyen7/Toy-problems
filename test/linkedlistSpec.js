@@ -205,3 +205,63 @@ describe('nthToLast', function() {
     expect(LinkedList.nthToLast(3, LinkedList.head)).to.deep.equal({value: 5, next: {value: 6, next: {value: 7, next: {value: 8, next: null}}}});
   });
 });
+
+describe('hasCycle', function() {
+  it('should be a function', function() {
+    var LinkedList = new linkedList.LinkedList();
+    expect(typeof LinkedList.hasCycle).to.equal('function');
+  });
+
+  it('should return true if its a cycle linked list', function() {
+    var LinkedList = new linkedList.LinkedList();
+    LinkedList.addToTail('a');
+    LinkedList.addToTail('b');
+    var startOfLoop = LinkedList.addToTail('c');
+    LinkedList.addToTail('d');
+    var endOfLoop = LinkedList.addToTail('e');
+    endOfLoop.next = startOfLoop;
+
+    expect(LinkedList.hasCycle(LinkedList.head)).to.equal(true);
+  });
+
+  it('should return false if its not a cycle linked list', function() {
+    var LinkedList = new linkedList.LinkedList();
+    var values = ['a', 'b', 'c', 'd', 'e'];
+
+    for (var i = 0; i < values.length; i++) {
+      LinkedList.addToTail(values[i]);
+    }
+
+    expect(LinkedList.hasCycle(LinkedList.head)).to.equal(false);
+  });
+});
+
+describe('findBeginningLoop', function() {
+  it('should be a function', function() {
+    var LinkedList = new linkedList.LinkedList();
+    expect(typeof LinkedList.findBeginningLoop).to.equal('function');
+  });
+
+  it('should return false if not circular linked list', function() {
+    var LinkedList = new linkedList.LinkedList();
+    var notCircular = "not a circular linkeded list";
+    var values = ['a', 'b', 'c', 'd', 'e'];
+
+    for (var i = 0; i < values.length; i++) {
+      LinkedList.addToTail(values[i]);
+    }
+    expect(LinkedList.findBeginningLoop(LinkedList.head)).to.equal(false);
+  });
+
+  it('should return a node at the beginning of the loop', function() {
+    var LinkedList = new linkedList.LinkedList();
+    LinkedList.addToTail('a');
+    LinkedList.addToTail('b');
+    var startOfLoop = LinkedList.addToTail('c');
+    LinkedList.addToTail('d');
+    var endOfLoop = LinkedList.addToTail('e');
+    endOfLoop.next = startOfLoop;
+
+    expect(LinkedList.findBeginningLoop(LinkedList.head)).to.equal('c');
+  });
+});

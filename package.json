@@ -4,7 +4,8 @@
   "description": "These are all the coding challenges that I have worked on",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "test-watch": "nodemon --exec npm run test"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/damonnguyen92/Toy-problems#readme",
   "dependencies": {
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0"
   }
 }
