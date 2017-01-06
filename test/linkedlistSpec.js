@@ -79,8 +79,8 @@ describe('removeNode', function() {
     expect(typeof LinkedList.removeNode).to.equal('function');
   });
 
-  it('should take a number as a input and throw: argument value should be a integer', function() {
-    var error = 'argument value should be a integer';
+  it('should take a number as a input and throw: argument target should be a integer', function() {
+    var error = 'argument target should be a integer';
     expect(LinkedList.removeNode('string')).to.equal(error);
     expect(LinkedList.removeNode({})).to.equal(error);
     expect(LinkedList.removeNode([])).to.equal(error);
@@ -95,7 +95,15 @@ describe('removeNode', function() {
       LinkedList.addToTail(i);
     }
 
-    expect(LinkedList.removeNode(3, LinkedList.head)).to.deep.equal({value: 1, next: {value: 2, next: {value: 4, next: {value: 5, next: null}}}});
+    LinkedList.removeNode(1, LinkedList.head);
+    expect(LinkedList.contains(1)).to.equal(false);
+    
+    LinkedList.removeNode(3, LinkedList.head);
+    expect(LinkedList.contains(3)).to.equal(false);
+
+    LinkedList.removeNode(5, LinkedList.head);
+    expect(LinkedList.contains(5)).to.equal(false);
+
   });
 
 
