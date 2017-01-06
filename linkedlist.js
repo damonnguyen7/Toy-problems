@@ -34,18 +34,45 @@ function LinkedList() {
   }
 
   //remove node
-  list.removeNode = function(value, linkedList) {
+  list.removeNode = function(target, linkedList) {
     var result;
-    var previous;
-    var error = 'argument value should be a integer';
+    var current;
+    var next;
+    var error = 'argument target should be a integer';
 
-    if (typeof value !== 'number') {
+    if (typeof target !== 'number') {
       return error;
     }
 
-    function nodeRemover(node) {
+    function removeNode(node) {
+      node.next = node.next.next;
     }
-    nodeRemover(linkedList);
+
+    function targetFinder(node) {
+      current = node;
+      next = node.next;
+      
+      if (current && current.next === null) {
+        if (current.value === target) {
+          list.head = null;
+          list.tail = null;
+          return result = null;
+        } else if (current.value !== target) {
+          result = list.head;
+        }
+      }
+      if (current.value === target) {
+        list.head = current.next;
+        return result = list.head;
+      }
+      if (next.value === target) {
+        removeNode(current);
+        return result = list.head;
+      }
+      targetFinder(node.next);
+    }
+
+    targetFinder(linkedList);
     return result;
   }
 
