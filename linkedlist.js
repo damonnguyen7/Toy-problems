@@ -182,9 +182,6 @@ function LinkedList() {
   return list;
 }
 
-
-
-
 module.exports = {
   LinkedList: LinkedList,
   Node: Node
