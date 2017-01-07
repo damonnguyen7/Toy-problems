@@ -2,9 +2,30 @@ var expect = require('chai').expect;
 var linkedList = require('../linkedlist');
 
 describe('linkedList', function() {
+  var LinkedList;
+
+  beforeEach(function() {
+    LinkedList = new linkedList.LinkedList;
+  });
+
   it('should be a function', function() {
     expect(typeof linkedList.LinkedList).to.equal('function');
   });
+
+  it('should have properties: head, tail', function() {
+    expect(LinkedList).to.have.property('head');
+    expect(LinkedList).to.have.property('tail');
+  });
+
+  it('should have methods: addToTail, removeHead, removeNode, removeDuplicateNode, nthToLast, findBeginningLoop', function() {
+    expect(LinkedList).to.have.property('addToTail');
+    expect(LinkedList).to.have.property('removeHead');
+    expect(LinkedList).to.have.property('removeNode');
+    expect(LinkedList).to.have.property('removeDuplicateNode');
+    expect(LinkedList).to.have.property('nthToLast');
+    expect(LinkedList).to.have.property('findBeginningLoop');
+  });
+
 });
 
 describe('Node', function() {
