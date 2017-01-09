@@ -179,6 +179,39 @@ function LinkedList() {
     return beginningOfLoop.value;
   }
 
+  list.sumLinkedList = function(aLinkedList, bLinkedList) {
+    var args = Array.prototype.slice.call(arguments, 0);
+    console.log('arggggggs: ', args);
+    var error = 'argument must be a linked list';
+    for (var i = 0; i < args.length; i++) {
+      if (Array.isArray(args[0]) && Array.isArray(args[1])) {
+        return error;
+      }
+      if (typeof args[0] !== 'object' && typeof args[1] !== 'object') {
+        return error;
+      }
+    } 
+
+    // console.log('aLinkedList: ', aLinkedList);
+    // console.log('bLinkedList: ', bLinkedList);
+
+    var carryOver = 0;
+    var result = new LinkedList();
+
+    while (aLinkedList.next !== null || carryOver) {
+      var sum = aLinkedList.value + bLinkedList.value;
+      if (sum >= 10) {
+        result.addToTail(sum + carryOver % 10);
+        carryOver = 1;
+      } else {
+        result.addToTail(sum + carryOver % 10);
+        carryOver = 0;
+      }
+    }
+    console.log('result.head:@@@@@@@@@@@@@@ ', result.head);
+    return result.head;
+  }
+
   return list;
 }
 
