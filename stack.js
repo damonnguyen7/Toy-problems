@@ -76,6 +76,15 @@ SetOfStacks.prototype.length = function() {
   return this.stackSize;
 };
 
+SetOfStacks.prototype.popAt = function(index) {
+  if (typeof index !== 'number') {
+    return 'argument must be a number';
+  }
+  var popAtValue = this.stack[index];
+  delete this.stack[index];
+  return popAtValue;
+}
+
 module.exports = {
   Stack: Stack,
   SetOfStacks: SetOfStacks
