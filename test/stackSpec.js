@@ -200,6 +200,7 @@ describe('SetOfStacks', function() {
     expect(mySetOfStacks).to.have.property('push');
     expect(mySetOfStacks).to.have.property('pop');
     expect(mySetOfStacks).to.have.property('length');
+    expect(mySetOfStacks).to.have.property('popAt');
   });
 });
 
@@ -233,7 +234,7 @@ describe('SetOfStacks.push', function() {
   });
 });
 
-describe('mySetOfStacks.pop', function() {
+describe('SetOfStacks.pop', function() {
   var mySetOfStacks;
 
   beforeEach(function() {
@@ -284,5 +285,41 @@ describe('mySetOfStacks.pop', function() {
     mySetOfStacks.push(dummyStack);
 
     expect(mySetOfStacks.pop()).to.deep.equal(dummyStack);
+  });
+});
+
+describe('SetOfStacks.popAt', function() {
+  var mySetOfStacks;
+
+  beforeEach(function() {
+    mySetOfStacks = new SetOfStacks;
+  });
+
+  it('should be a function', function() {
+    expect(typeof mySetOfStacks.popAt).to.equal('function');
+  });
+
+  it('should take in a number as an argument or throw error', function() {
+    var error = 'argument must be a number';
+    expect(mySetOfStacks.popAt('string')).to.equal(error);
+    expect(mySetOfStacks.popAt({})).to.equal(error);
+    expect(mySetOfStacks.popAt([])).to.equal(error);
+    expect(mySetOfStacks.popAt(function(){})).to.equal(error);
+    expect(mySetOfStacks.popAt(undefined)).to.equal(error);
+  });
+  //TEST IS FAILING:
+  it('should pop operation on a specic sub-stack', function() {
+    for (var i = 0; i <= 4; i++) {
+      var dummyStack = {
+        id: i,
+        length: function() {
+          return 20;
+        }
+      }
+      mySetOfStacks.push(dummyStack);
+    }
+
+    expect(mySetOfStacks.popAt(3)).to.deep.equal({id: 3, length: function() {return 20;}});
+    expect(mySetOfStacks.popAt(1)).to.deep.equal({id: 1, length: function() {return 20;}});
   });
 });
