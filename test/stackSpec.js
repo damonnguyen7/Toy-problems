@@ -1,5 +1,7 @@
 var expect = require('chai').expect;
 var Stack = require('../stack.js').Stack;
+var SetOfStacks = require('../stack.js').SetOfStacks;
+
 
 describe('Stack', function() {
   var myStack;
@@ -172,5 +174,115 @@ describe('Stack.min', function() {
     expect(myStack.min()).to.equal(7);
     myStack.pop();
     expect(myStack.min()).to.equal(7);
+  });
+});
+
+//################################SetOfStacks####################################
+
+describe('SetOfStacks', function() {
+  var mySetOfStacks;
+
+  beforeEach(function() {
+    mySetOfStacks = new SetOfStacks;
+  });
+
+  it('should be a function', function() {
+    expect(typeof SetOfStacks).to.equal('function');
+  });
+
+  it('should have properties: stack, stackSize, threshold', function() {
+    expect(mySetOfStacks).to.have.property('stack');
+    expect(mySetOfStacks).to.have.property('stackSize');
+    expect(mySetOfStacks).to.have.property('threshold');
+  });
+
+  it('should have methods: push, pop, length', function() {
+    expect(mySetOfStacks).to.have.property('push');
+    expect(mySetOfStacks).to.have.property('pop');
+    expect(mySetOfStacks).to.have.property('length');
+  });
+});
+
+describe('SetOfStacks.push', function() {
+  var mySetOfStacks;
+
+  beforeEach(function() {
+    mySetOfStacks = new SetOfStacks;
+  });
+
+  it('should be a function', function() {
+    expect(typeof mySetOfStacks.push).to.equal('function');
+  });
+
+  it('should throw an error if input stack is greater than 20', function() {
+    var error = 'argument stack must be less or equal to 20';
+    var myStack = new Stack();
+    for (var i = 1; i <= 21; i++) {
+      myStack.push(i);
+    }
+    expect(mySetOfStacks.push(myStack)).to.equal(error);
+  });
+
+  it('should push a stack that is less than or equal to 20', function() {
+    var myStack = new Stack();
+    for (var i = 1; i <= 20; i++) {
+      myStack.push(i);
+    }
+    mySetOfStacks.push(myStack);
+    expect(mySetOfStacks.length()).to.equal(1);
+  });
+});
+
+describe('mySetOfStacks.pop', function() {
+  var mySetOfStacks;
+
+  beforeEach(function() {
+    mySetOfStacks = new SetOfStacks;
+  });
+
+  it('should be a function', function() {
+    expect(typeof mySetOfStacks.pop).to.equal('function');
+  });
+
+  it('should be the length of 0 after popping 5 times', function() {
+    var dummyStack = {
+      length: function() {
+        return 20;
+      }
+    };
+
+    for (var j = 1; j <= 5; j++) {
+      mySetOfStacks.push(dummyStack);
+    }
+    expect(mySetOfStacks.length()).to.equal(5);
+
+    for (var i = 1; i <= 5; i++) {
+      mySetOfStacks.pop();
+    }
+    expect(mySetOfStacks.length()).to.equal(0);
+  });
+
+  it('stack size should be a minimum on 0', function() {
+    for (var i = 1; i <= 5; i++) {
+      mySetOfStacks.pop()
+    }
+    expect(mySetOfStacks.length()).to.equal(0);
+  });
+
+  it('should notify users if there is nothing left to pop', function() {
+    var notification = 'no more item on stack!';
+    expect(mySetOfStacks.pop()).to.equal(notification);
+  });
+
+  it('should return the stack that it is popping', function() {
+    var dummyStack = {
+      length: function() {
+        return 20;
+      }
+    };
+
+    mySetOfStacks.push(dummyStack);
+
+    expect(mySetOfStacks.pop()).to.deep.equal(dummyStack);
   });
 });
