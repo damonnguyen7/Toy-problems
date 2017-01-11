@@ -23,13 +23,14 @@ describe('Stack', function() {
     expect(myStack).to.have.property('currentMin');
   });
 
-  it('should have methods: push, pop, length, peek, isEmpty', function() {
+  it('should have methods: push, pop, length, peek, isEmpty, ascOrder', function() {
     expect(myStack).to.have.property('push');
     expect(myStack).to.have.property('pop');
     expect(myStack).to.have.property('min');
     expect(myStack).to.have.property('length');
     expect(myStack).to.have.property('peek');
     expect(myStack).to.have.property('isEmpty');
+    expect(myStack).to.have.property('ascOrder');
   });
 });
 
@@ -179,7 +180,7 @@ describe('Stack.min', function() {
   });
 });
 
-describe('peek', function() {
+describe('Stack.peek', function() {
   var myStack;
 
   beforeEach(function() {
@@ -203,7 +204,7 @@ describe('peek', function() {
   });
 });
 
-describe('isEmpty', function() {
+describe('Stack.isEmpty', function() {
   var myStack;
 
   beforeEach(function() {
@@ -220,6 +221,33 @@ describe('isEmpty', function() {
     expect(myStack.isEmpty()).to.equal(false);
     myStack.pop();
     expect(myStack.isEmpty()).to.equal(true);
+  });
+});
+
+describe('Stack.ascOrder', function() {
+  var myStack;
+
+  beforeEach(function() {
+    myStack = new Stack;
+  });
+
+  it('should be a function', function() {
+    expect(typeof myStack.ascOrder).to.equal('function');
+  });
+
+  it('should sort stack in ascending order', function() {
+    var ascendingStack = {
+      0: 1,
+      1: 3,
+      2: 5,
+      3: 7
+    };
+
+    myStack.push(5);
+    myStack.push(7);
+    myStack.push(3);
+    myStack.push(1);
+    expect(myStack.ascOrder(myStack.stack)).to.deep.equal(ascendingStack);
   });
 });
 

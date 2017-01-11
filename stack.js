@@ -56,6 +56,23 @@ Stack.prototype.isEmpty = function() {
   return this.stackSize === 0;
 };
 
+Stack.prototype.ascOrder = function(stack) {
+  var placeHolder;
+  var sorted = true;
+  for (var i = 0; i < this.length(); i++) {
+    if (stack[i + 1] !== undefined && stack[i] > stack[i + 1]) {
+      sorted = false;
+      placeHolder = stack[i];
+      stack[i] = stack[i + 1];
+      stack[i + 1] = placeHolder;
+    }
+  }
+  if (!sorted) {
+    this.ascOrder(stack);
+  } 
+  return this.stack;
+};
+
 //################################SetOfStacks####################################
 function SetOfStacks() {
   this.stack = {};
