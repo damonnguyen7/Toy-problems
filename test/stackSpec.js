@@ -23,11 +23,13 @@ describe('Stack', function() {
     expect(myStack).to.have.property('currentMin');
   });
 
-  it('should have methods: push, pop, length', function() {
+  it('should have methods: push, pop, length, peek, isEmpty', function() {
     expect(myStack).to.have.property('push');
     expect(myStack).to.have.property('pop');
     expect(myStack).to.have.property('min');
     expect(myStack).to.have.property('length');
+    expect(myStack).to.have.property('peek');
+    expect(myStack).to.have.property('isEmpty');
   });
 });
 
@@ -176,6 +178,32 @@ describe('Stack.min', function() {
     expect(myStack.min()).to.equal(7);
   });
 });
+
+describe('peek', function() {
+  var myStack;
+
+  beforeEach(function() {
+    myStack = new Stack;
+  });
+
+  it('should be a function', function() {
+    expect(typeof myStack.peek).to.equal('function');
+  });
+
+  it('should notify users if the stack is empty', function() {
+    var notification = 'The stack is currently empty';
+    expect(myStack.peek()).to.equal(notification);
+  });
+
+  it('should return the value on the top of the stack', function() {
+    for (var i = 1; i <= 5; i++) {
+      myStack.push(i);
+    }
+    expect(myStack.peek()).to.equal(5);
+  });
+});
+
+
 
 //################################SetOfStacks####################################
 

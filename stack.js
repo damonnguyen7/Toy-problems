@@ -45,6 +45,15 @@ Stack.prototype.length = function() {
   return this.stackSize;
 };
 
+Stack.prototype.peek = function() {
+  if (this.stackSize === 0) {
+    return 'The stack is currently empty';
+  }
+  return this.stack[this.stackSize - 1];
+};
+
+Stack.prototype.isEmpty = function() {};
+
 //################################SetOfStacks####################################
 function SetOfStacks() {
   this.stack = {};
