@@ -52,7 +52,9 @@ Stack.prototype.peek = function() {
   return this.stack[this.stackSize - 1];
 };
 
-Stack.prototype.isEmpty = function() {};
+Stack.prototype.isEmpty = function() {
+  return this.stackSize === 0;
+};
 
 //################################SetOfStacks####################################
 function SetOfStacks() {

@@ -203,7 +203,25 @@ describe('peek', function() {
   });
 });
 
+describe('isEmpty', function() {
+  var myStack;
 
+  beforeEach(function() {
+    myStack = new Stack;
+  });
+
+  it('should be a function', function() {
+    expect(typeof myStack.isEmpty).to.equal('function');
+  });
+
+  it('should return a boolean depending if the stack is empty', function() {
+    expect(myStack.isEmpty()).to.equal(true);
+    myStack.push(1);
+    expect(myStack.isEmpty()).to.equal(false);
+    myStack.pop();
+    expect(myStack.isEmpty()).to.equal(true);
+  });
+});
 
 //################################SetOfStacks####################################
 
