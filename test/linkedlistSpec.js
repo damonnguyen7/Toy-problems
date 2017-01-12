@@ -284,7 +284,6 @@ describe('findBeginningLoop', function() {
   });
 
   it('should return false if not circular linked list', function() {
-    var notCircular = "not a circular linkeded list";
     var values = ['a', 'b', 'c', 'd', 'e'];
     for (var i = 0; i < values.length; i++) {
       LinkedList.addToTail(values[i]);
