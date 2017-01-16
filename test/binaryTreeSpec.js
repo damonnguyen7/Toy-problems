@@ -17,10 +17,12 @@ describe('BinarySearchTree', function() {
     expect(myBinarySearchTree).to.have.property('right');
   });
 
-  it('should have methods: insert, contains, depthFirstLog', function() {
+  it('should have methods: insert, contains, depthFirstLog, isBalanced', function() {
     expect(myBinarySearchTree).to.have.property('insert');
     expect(myBinarySearchTree).to.have.property('contains');
     expect(myBinarySearchTree).to.have.property('depthFirstLog');
+    expect(myBinarySearchTree).to.have.property('depthFirstLog');
+    expect(myBinarySearchTree).to.have.property('isBalanced');
   });
 
   it('root node should be the value of 8', function() {
@@ -125,5 +127,33 @@ describe('BinarySearchTree.depthFirstLog', function() {
     resultValues.forEach(function(value) {
       expect(myBinarySearchTree.contains(value)).to.equal(true);
     });
+  });
+});
+
+describe('isBalanced', function() {
+  var myBinarySearchTree;
+
+  beforeEach(function() {
+    myBinarySearchTree = new BinarySearchTree(5);
+  });
+
+  it('should be a function', function() {
+    expect(typeof myBinarySearchTree.isBalanced).to.equal('function');
+  });
+
+  it('should return true if tree is not balanced', function() {
+    var insertValue = [4, 6];
+    insertValue.forEach(function(node) {
+      myBinarySearchTree.insert(node);
+    });
+    expect(myBinarySearchTree.isBalanced()).to.equal(true);
+  });
+
+  it('should return false if tree is not balanced', function() {
+    var insertValue = [2, 6];
+    insertValue.forEach(function(node) {
+      myBinarySearchTree.insert(node);
+    });
+    expect(myBinarySearchTree.isBalanced()).to.equal(false);
   });
 });

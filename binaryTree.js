@@ -50,4 +50,23 @@ BinarySearchTree.prototype.depthFirstLog = function(callback) {
   }
 };
 
+BinarySearchTree.prototype.isBalanced = function() {
+  //this function will return a boolean value depending if the ndoe is a leaf
+  //leaf is a node that has no children
+  function isLeaf(leaf) {
+    if (leaf.left === null && leaf.right === null) {
+      return true;
+    }
+  }
+  //we can test to see if this tree is balanced because we have two leaves
+  if (isLeaf(this.left) && isLeaf(this.right)) {
+    console.log('loggging if node is a leaf')
+    if (this.value - this.left.value === 1 || this.value - this.right.value === 1) {
+      return true
+    } else {
+      return false;
+    }
+  }
+}
+
 module.exports = BinarySearchTree;
