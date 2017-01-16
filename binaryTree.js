@@ -60,7 +60,6 @@ BinarySearchTree.prototype.isBalanced = function() {
   }
   //we can test to see if this tree is balanced because we have two leaves
   if (isLeaf(this.left) && isLeaf(this.right)) {
-    console.log('loggging if node is a leaf')
     if (this.value - this.left.value === 1 || this.value - this.right.value === 1) {
       return true
     } else {
@@ -68,5 +67,69 @@ BinarySearchTree.prototype.isBalanced = function() {
     }
   }
 }
+
+BinarySearchTree.prototype.breadthFirstSearch = function(callback) {
+  
+};
+
+BinarySearchTree.prototype.inOrder = function(callback) {
+  var orders = ['left', 'current', 'right'];
+  var node = this;
+
+  function traverse(order) {
+    if (order === 'left' && node.left !== null) {
+      callback(node.left.value);
+    } else if (order === 'current') {
+      callback(node.value);
+    } else if (order === 'right' && node.right !== null) {
+      callback(node.right.value);
+    }
+  };
+
+  for (var i = 0; i < orders.length; i++) {
+    var currentOrder = orders[i];
+    traverse(currentOrder);
+  }
+};
+
+BinarySearchTree.prototype.preOrder = function(callback) {
+  var orders = ['current', 'left', 'right'];
+  var node = this;
+
+  function traverse(order) {
+    if (order === 'left' && node.left !== null) {
+      callback(node.left.value);
+    } else if (order === 'current') {
+      callback(node.value);
+    } else if (order === 'right' && node.right !== null) {
+      callback(node.right.value);
+    }
+  };
+
+  for (var i = 0; i < orders.length; i++) {
+    var currentOrder = orders[i];
+    traverse(currentOrder);
+  }
+};
+
+BinarySearchTree.prototype.postOrder = function(callback) {
+  var orders = ['left', 'right', 'current'];
+  var node = this;
+
+  function traverse(order) {
+    if (order === 'left' && node.left !== null) {
+      callback(node.left.value);
+    } else if (order === 'current') {
+      callback(node.value);
+    } else if (order === 'right' && node.right !== null) {
+      callback(node.right.value);
+    }
+  };
+
+  for (var i = 0; i < orders.length; i++) {
+    var currentOrder = orders[i];
+    traverse(currentOrder);
+  }
+};
 
 module.exports = BinarySearchTree;

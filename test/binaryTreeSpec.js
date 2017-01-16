@@ -17,12 +17,15 @@ describe('BinarySearchTree', function() {
     expect(myBinarySearchTree).to.have.property('right');
   });
 
-  it('should have methods: insert, contains, depthFirstLog, isBalanced', function() {
+  it('should have methods: insert, contains, depthFirstLog, isBalanced, breadthFirstSearch, inOrder, preOrder, postOrder', function() {
     expect(myBinarySearchTree).to.have.property('insert');
     expect(myBinarySearchTree).to.have.property('contains');
     expect(myBinarySearchTree).to.have.property('depthFirstLog');
-    expect(myBinarySearchTree).to.have.property('depthFirstLog');
     expect(myBinarySearchTree).to.have.property('isBalanced');
+    expect(myBinarySearchTree).to.have.property('breadthFirstSearch');
+    expect(myBinarySearchTree).to.have.property('inOrder');
+    expect(myBinarySearchTree).to.have.property('preOrder');
+    expect(myBinarySearchTree).to.have.property('postOrder');
   });
 
   it('root node should be the value of 8', function() {
@@ -130,7 +133,7 @@ describe('BinarySearchTree.depthFirstLog', function() {
   });
 });
 
-describe('isBalanced', function() {
+describe('BinarySearchTree.isBalanced', function() {
   var myBinarySearchTree;
 
   beforeEach(function() {
@@ -155,5 +158,112 @@ describe('isBalanced', function() {
       myBinarySearchTree.insert(node);
     });
     expect(myBinarySearchTree.isBalanced()).to.equal(false);
+  });
+});
+
+describe('BinarySearchTree.breadthFirstSearch', function() {
+  var myBinarySearchTree;
+
+  beforeEach(function() {
+    myBinarySearchTree = new BinarySearchTree(8);
+  });
+
+  it('should be a function', function() {
+    expect(typeof myBinarySearchTree.breadthFirstSearch).to.equal('function');
+  });
+
+  it('should search a node and it\'s sibling before going to any of the children', function() {
+    var insertValue = [3, 10, 1, 6, 14, 4, 7, 13];
+    var results = [];
+
+    function pushValue(value) {
+      results.push(value);
+    };
+
+    insertValue.forEach(function(value) {
+      myBinarySearchTree.insert(value);
+    });
+
+    myBinarySearchTree.breadthFirstSearch(pushValue);
+
+    expect(results).to.deep.equal([8, 3, 10, 1, 6, 14, 4, 7, 13]);
+  });
+});
+
+describe('BinarySearchTree.inOrder', function() {
+  var myBinarySearchTree;
+
+  beforeEach(function() {
+    var insertValue = [1, 3];
+    myBinarySearchTree = new BinarySearchTree(2);
+    insertValue.forEach(function(value) {
+      myBinarySearchTree.insert(value);
+    });
+  });
+
+  it('should be a function', function() {
+    expect(typeof myBinarySearchTree.inOrder).to.equal('function');
+  });
+
+  it('should traverse left node, current node, and right node', function() {
+    var results = [];
+    function pushValue(value) {
+      results.push(value);
+    };
+
+    myBinarySearchTree.inOrder(pushValue);
+    expect(results).to.deep.equal([1,2,3]);
+  });
+});
+
+describe('BinarySearchTree.preOrder', function() {
+  var myBinarySearchTree;
+
+  beforeEach(function() {
+    var insertValue = [1, 3];
+    myBinarySearchTree = new BinarySearchTree(2);
+    insertValue.forEach(function(value) {
+      myBinarySearchTree.insert(value);
+    });
+  });
+
+  it('should be a function', function() {
+    expect(typeof myBinarySearchTree.preOrder).to.equal('function');
+  });
+
+  it('should traverse current node, left node, and right node', function() {
+    var results = [];
+    function pushValue(value) {
+      results.push(value);
+    };
+
+    myBinarySearchTree.preOrder(pushValue);
+    expect(results).to.deep.equal([2,1,3]);
+  });
+});
+
+describe('BinarySearchTree.postOrder', function() {
+  var myBinarySearchTree;
+
+  beforeEach(function() {
+    var insertValue = [1, 3];
+    myBinarySearchTree = new BinarySearchTree(2);
+    insertValue.forEach(function(value) {
+      myBinarySearchTree.insert(value);
+    });
+  });
+
+  it('should be a function', function() {
+    expect(typeof myBinarySearchTree.postOrder).to.equal('function');
+  });
+
+  it('should traverse current node, left node, and right node', function() {
+    var results = [];
+    function pushValue(value) {
+      results.push(value);
+    };
+
+    myBinarySearchTree.postOrder(pushValue);
+    expect(results).to.deep.equal([1, 3, 2]);
   });
 });
