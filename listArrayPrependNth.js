@@ -35,3 +35,29 @@ this is a list
   }
 }
 */
+
+function listToArray(list) {
+  var result = [];
+  var currentItem = list;
+  while (currentItem.rest !== null) {
+    result.push(currentItem.val);
+    currentItem = currentItem.rest;
+  }
+  if(currentItem.rest === null) {
+    result.push(currentItem.val);
+  }
+    return result;
+}
+
+var list = {
+  val: 1,
+  rest: {
+    val: 2,
+    rest: {
+      val: 3,
+      rest: null
+    }
+  }
+}
+
+listToArray(list); //[1,2,3]
