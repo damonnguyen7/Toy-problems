@@ -81,3 +81,16 @@ prepend(10, prepend(20, null));
   }
 }
 */
+
+function nth(list, index) {
+  var currentItem = list;
+  for(var i = 0; i <= index; i++) {
+    if(i !== index) {
+      currentItem = currentItem.rest;
+    } else {
+      return currentItem.val;
+    }
+  }
+}
+
+nth(arrayToList([10,20,30]), 1); //20
