@@ -61,3 +61,23 @@ var list = {
 }
 
 listToArray(list); //[1,2,3]
+
+function prepend(val,rest){
+  var result = {
+    val: val,
+    rest: rest || null
+  }
+  return result;
+}
+
+prepend(10, prepend(20, null)); 
+
+/*
+{
+  val: 10,
+  rest: {
+    val: 20,
+    rest: null
+  }
+}
+*/
