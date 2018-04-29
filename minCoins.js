@@ -1,16 +1,17 @@
 //input = total value of coins
 //output = least amount of coins object
 function minCoins(totalValue) {
-  var coins = [25, 10, 5, 1];
-  var results = {'25': 0, '10': 0, '5': 0, '1': 0};
-  var totalValue = totalValue;
-  coins.forEach(function(coin) {
+  const coins = [25, 10, 5, 1];
+  const coinIndex = coins.reduce((index, coin) => {
+    var coinCounter = 0;
     while (totalValue - coin >= 0) {
       totalValue = totalValue - coin;
-      ++results[coin];
-    } 
-  });
-  return results;
+      coinCounter++;
+    }
+    index[coin] = coinCounter;
+    return index;
+  }, {});
+  return coinIndex;
 };
 
 minCoins(18); //=> return {'25': 0, '10': 1, '5': 1, '1': 3}
