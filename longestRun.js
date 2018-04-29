@@ -3,18 +3,28 @@ Write a function that, given a string, finds the longest run of identical charac
 If there are two runs of equal length, return the first one. Return [0,0] for no runs.
 */
 
-var longestRun = function(string) {
+function calRunDistance(range) {
+  return range[1] - range[0];
+};
+
+function longestRun(string) {
   var greatestRun = [0, 0],
-      currentRun = [0, 0];
-  for (var i = 1; i < string.length; i++) {
-    if (string[i - 1] === string[i]) {
+      currentRun = [-1, 0];
+  if (string.length === 0) return currentRun;
+  for (let i = 0; i < string.length; i++) {
+    let currentCharacter = string[i];
+    let nextCharacter = string[i + 1];
+    if (currentRun[0] === -1 && currentRun[1] === 0) {
+      if (currentCharacter === nextCharacter) currentRun[0] = i;
+    } else if (currentCharacter === nextCharacter) {
+      currentRun[1] = i + 1;
+    } else if (currentCharacter !== nextCharacter) {
       currentRun[1] = i;
-      if (currentRun[1] - currentRun[0] > greatestRun[1] - greatestRun[0]) {
-         greatestRun = currentRun;
+      if (calRunDistance(currentRun) > calRunDistance(greatestRun)) {
+        greatestRun = currentRun;
+        currentRun = [-1, 0];
       }
-    } else {
-      currentRun = [i, i];
     }
-  }
+  };
   return greatestRun;
 };
